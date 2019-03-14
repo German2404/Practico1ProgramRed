@@ -15,24 +15,16 @@ public class TCPConnection {
 	
 	private static TCPConnection instance = null;
 	
-	private TCPConnection(int port) {
-		try {
-			server = new ServerSocket(port);
-		}catch(IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-	
-	public synchronized static TCPConnection getInstance(int port) {
-		if(instance == null) {
-			instance = new TCPConnection(port);
-		}
-		return instance;
+	private TCPConnection() {
 	}
 	
 	public synchronized static TCPConnection getInstance() {
+		if(instance == null) {
+			instance = new TCPConnection();
+		}
 		return instance;
 	}
+	
 	
 	//Global
 	private Socket socket;
@@ -43,6 +35,7 @@ public class TCPConnection {
 	//Metodo del servidor
 	public void waitForConnection(int port) {
 		try {
+			server = new ServerSocket(port);
 			System.out.println("Esperando cliente");
 			socket = server.accept();
 			System.out.println("Cliente conectado!");

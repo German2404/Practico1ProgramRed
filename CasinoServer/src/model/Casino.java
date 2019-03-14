@@ -10,9 +10,12 @@ public class Casino {
 	private Stack<String> cards;
 	public static final String[] pintas= {"P","T","D","C"};
 	public static final String[] numeros= {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
+	private ArrayList<String> onTable;
 	
 	public Casino(String [] ids) {
+		onTable=new ArrayList<String>();
 		cards=new Stack<String>();
+		players=new ArrayList<Player>();
 		generateCards();
 		for (int i = 0; i < ids.length; i++) {
 			players.add(new Player(ids[i]));
@@ -46,6 +49,23 @@ public class Casino {
 		}
  
 		return array;
+	}
+	
+	public ArrayList<Player> getPlayers(){
+		return players;
+	}
+	
+	public void deal() {
+		if(onTable.size()==0) {
+			onTable.add(cards.pop());
+			onTable.add(cards.pop());
+		}
+		else if(onTable.size()>=2&&onTable.size()<5){
+			onTable.add(cards.pop());
+		}
+	}
+	public ArrayList<String> getOnTable(){
+		return onTable;
 	}
 	
 

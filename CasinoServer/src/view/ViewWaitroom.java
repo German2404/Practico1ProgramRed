@@ -17,28 +17,27 @@ public class ViewWaitroom extends JFrame implements ActionListener{
 	
 	//Componentes
 	private JLabel labelIntro;
-
-	public void setConnectedUsers(String connectedUsers) {
-		this.connectedUsers.setText(connectedUsers);
-		controller=new ControllerWaitroom(this);
-	}
-
-
 	private ControllerWaitroom controller;
 	private TextField connectedUsers;
 	private JButton empezar;
+
+	public void setConnectedUsers(String connectedUsers) {
+		this.connectedUsers.setText(connectedUsers);
+	}
 	
 	public ViewWaitroom() {
 		super("Conexión cliente");
 		GridLayout layout = new GridLayout(1, 3);
 		this.setLayout(layout);
-		this.setSize(500,500);
+		this.setSize(500,200);
 		empezar=new JButton("Start");
 		empezar.addActionListener(this);
 		empezar.setActionCommand("aaa");
+		this.add(empezar);
 		
 		labelIntro = new JLabel("Esperando conexiónes...");
-		connectedUsers=new TextField("0");
+		connectedUsers=new TextField("0 Conectados");
+		connectedUsers.setEditable(false);
 		this.add(labelIntro);
 		this.add(connectedUsers);
 		
